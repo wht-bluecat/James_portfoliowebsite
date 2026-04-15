@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(npx --yes create-next-app@latest temp-app --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(cp -r temp-app/.  .)",
+      "Bash(cp temp-app/.gitignore .)",
+      "Bash(cp temp-app/.eslintrc.json .)",
+      "Bash(shopt -s dotglob)",
+      "Bash(mv temp-app/* .)",
+      "Bash(rm -rf temp-app)",
+      "Bash(npx --yes shadcn@latest init -d --style default --base-color neutral --css-variables)",
+      "Bash(npx shadcn@latest init -d)",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:www.wallofportfolios.in)",
+      "WebFetch(domain:riddhimanpaul.framer.website)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__computer",
+      "Bash(npm install:*)",
+      "Bash(npx next:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
