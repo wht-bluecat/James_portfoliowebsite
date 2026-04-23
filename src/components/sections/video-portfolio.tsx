@@ -7,9 +7,15 @@ type Project = {
 } & (
   | { type: "youtube"; youtubeId: string }
   | { type: "behance"; behanceId: string }
+  | { type: "vimeo"; vimeoId: string }
 )
 
 const projects: Project[] = [
+  {
+    title: "Panaskopic — Ad",
+    type: "vimeo",
+    vimeoId: "1185939561",
+  },
   {
     title: "Stanley Chen — Intro Video",
     type: "youtube",
@@ -92,6 +98,17 @@ export function VideoPortfolio() {
                     src={`https://www.youtube.com/embed/${project.youtubeId}`}
                     title={project.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                    scrolling="no"
+                    className="absolute inset-0 w-full h-full border-0"
+                    style={{ overflow: "hidden" }}
+                  />
+                ) : project.type === "vimeo" ? (
+                  <iframe
+                    src={`https://player.vimeo.com/video/${project.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
+                    title={project.title}
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
                     scrolling="no"
