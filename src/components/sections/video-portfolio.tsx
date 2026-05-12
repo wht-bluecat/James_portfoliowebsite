@@ -32,6 +32,11 @@ const projects: Project[] = [
     youtubeId: "9bQN5kXSYHI",
   },
   {
+    title: "Archway Learning — Leadership Promotional Video",
+    type: "vimeo",
+    vimeoId: "1191550837",
+  },
+  {
     title: "Personal — Video Essay",
     type: "youtube",
     youtubeId: "diC6Sm6jOmE",

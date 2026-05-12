@@ -36,47 +36,82 @@ export function RetroComputer() {
         className="relative select-none"
       >
         {/* ═══ MONITOR ASSEMBLY ═══ */}
-        <div className="relative">
-          {/* ── Right side panel (behind front) ── */}
+        {/* Depth: dx=24px horizontal, dy=18px vertical — back of box offset up-right. */}
+        <div className="relative w-[280px] md:w-[300px] h-[240px] md:h-[260px]">
+          {/* ── Top wall (parallelogram, flush with front-top edge) ── */}
           <div
-            className="absolute top-[6px] -right-[34px] w-[40px] rounded-r-[4px]"
+            className="absolute"
             style={{
-              height: "248px",
-              background: "linear-gradient(90deg, #cec7b9, #c4bdb0)",
-              transform: "skewY(-6deg)",
+              top: "-18px",
+              left: 0,
+              width: "calc(100% + 24px)",
+              height: "18px",
+              background: "linear-gradient(180deg, #c8c1b3 0%, #d8d1c3 60%, #e2dbd0 100%)",
+              clipPath: "polygon(0 100%, 24px 0, 100% 0, calc(100% - 24px) 100%)",
               zIndex: 1,
             }}
           >
-            {/* Side vents */}
-            <div className="absolute inset-y-[30px] left-[8px] right-[8px] flex flex-col gap-[5px]">
-              {Array.from({ length: 16 }).map((_, i) => (
+            {/* Top vents — sit on the visible top face */}
+            <div
+              className="absolute flex flex-col gap-[3px]"
+              style={{ top: "4px", left: "70px", right: "70px" }}
+            >
+              {Array.from({ length: 3 }).map((_, i) => (
                 <div key={i} className="w-full h-[1.5px] rounded-full bg-[#b8b1a3]" />
               ))}
             </div>
           </div>
 
-          {/* ── Top panel (behind front) ── */}
+          {/* ── Right side wall (parallelogram, flush with front-right edge) ── */}
           <div
-            className="absolute -top-[28px] left-[4px] h-[34px] rounded-t-[4px]"
+            className="absolute"
             style={{
-              width: "292px",
-              background: "linear-gradient(180deg, #e8e1d3, #ddd6c8)",
-              transform: "skewX(-6deg)",
-              transformOrigin: "bottom left",
+              top: "-18px",
+              right: "-24px",
+              width: "24px",
+              height: "calc(100% + 18px)",
+              background: "linear-gradient(90deg, #d0c9bb 0%, #c4bdb0 60%, #b8b1a3 100%)",
+              clipPath:
+                "polygon(0 18px, 24px 0, 24px calc(100% - 18px), 0 100%)",
               zIndex: 1,
             }}
           >
-            {/* Top vents */}
-            <div className="absolute inset-x-[40px] top-[8px] flex flex-col gap-[3px]">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="w-full h-[1.5px] rounded-full bg-[#d0c9bb]" />
+            {/* Side vents — vertical column on the side face */}
+            <div
+              className="absolute flex flex-col gap-[5px]"
+              style={{ top: "60px", bottom: "60px", left: "5px", right: "5px" }}
+            >
+              {Array.from({ length: 14 }).map((_, i) => (
+                <div key={i} className="w-full h-[1.5px] rounded-full bg-[#a8a194]" />
               ))}
             </div>
           </div>
 
-          {/* ── Front face (on top of everything) ── */}
+          {/* ── Seam highlights along the 3D corner edges ── */}
+          {/* Top-front edge (where top wall meets front face) */}
           <div
-            className="relative w-[280px] md:w-[300px] h-[240px] md:h-[260px] rounded-[8px]"
+            className="absolute left-0 right-0 pointer-events-none"
+            style={{
+              top: "-0.5px",
+              height: "1px",
+              background: "rgba(255,255,255,0.5)",
+              zIndex: 3,
+            }}
+          />
+          {/* Right-front edge (where side wall meets front face) */}
+          <div
+            className="absolute top-0 bottom-0 pointer-events-none"
+            style={{
+              right: "-0.5px",
+              width: "1px",
+              background: "rgba(0,0,0,0.08)",
+              zIndex: 3,
+            }}
+          />
+
+          {/* ── Front face ── */}
+          <div
+            className="relative w-full h-full rounded-[8px]"
             style={{
               background: "linear-gradient(180deg, #ede6d8 0%, #e2dbd0 40%, #d8d1c5 100%)",
               boxShadow: "inset 0 1px 0 rgba(255,255,255,0.6), inset 0 -1px 3px rgba(0,0,0,0.04), 4px 6px 20px rgba(0,0,0,0.12)",
