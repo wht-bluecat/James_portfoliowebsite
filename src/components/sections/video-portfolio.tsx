@@ -76,6 +76,11 @@ const projects: Project[] = [
     type: "behance",
     behanceId: "212688527",
   },
+  {
+    title: "Latest Project",
+    type: "youtube",
+    youtubeId: "YbUXs5ka_VM",
+  },
 ]
 
 export function VideoPortfolio() {
