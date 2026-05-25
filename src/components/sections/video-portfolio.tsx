@@ -77,7 +77,7 @@ const projects: Project[] = [
     behanceId: "212688527",
   },
   {
-    title: "Latest Project",
+    title: "Fintech Podcast",
     type: "youtube",
     youtubeId: "YbUXs5ka_VM",
   },
