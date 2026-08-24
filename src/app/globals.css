@@ -4,16 +4,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ── Google Fonts (loaded via layout.tsx next/font) ── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   TOKENS
+
+   One palette, two themes. Every colour is defined once on :root in the light
+   theme and re-declared in exactly two places for dark (the system-preference
+   block and the explicit .dark class), so a colour can never exist only in dark.
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme inline {
+  /* shadcn-compatible names, kept so ui/button.tsx keeps working */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-space-grotesk);
-  --font-serif: var(--font-instrument-serif);
-
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
@@ -31,10 +33,23 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
 
-  --color-surface: #f5f5f0;
-  --color-grid-line: #d4d4cc;
-  --color-grid-cross: #b0b0a8;
+  /* Semantic names used by the sections — easier to read than "foreground/60" */
+  --color-paper: var(--background);
+  --color-raised: var(--raised);
+  --color-ink: var(--foreground);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--muted-foreground);
+  --color-hairline: var(--border);
+  --color-shade: var(--shade);
+  --color-brand: var(--primary);
 
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-space-grotesk);
+  --font-serif: var(--font-instrument-serif);
+
+  /* Sharp everywhere. The one pill on the page is the primary CTA, and that
+     contrast is the point — it is the only thing shaped like a button. */
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
@@ -45,132 +60,258 @@
 }
 
 :root {
-  --background: #f5f5f0;
-  --foreground: #1a1a1a;
-  --card: #f5f5f0;
-  --card-foreground: #1a1a1a;
-  --popover: #f5f5f0;
-  --popover-foreground: #1a1a1a;
-  --primary: #1a7a4f;
+  color-scheme: light;
+
+  --background: #f4f2ec;
+  --raised: #faf9f5;
+  --foreground: #16150f;
+  --ink-2: #4a483e;
+  /* 4.9:1 on the paper background. The lighter grey this replaced measured
+     3.8:1, which fails WCAG AA for the 10–13px metadata it is used on. */
+  --muted-foreground: #6a695e;
+  --border: #ddd9cd;
+  --shade: #e6e3d9;
+
+  --primary: #146b47;
   --primary-foreground: #ffffff;
-  --secondary: #e8e8e3;
-  --secondary-foreground: #1a1a1a;
-  --muted: #e2e2dd;
-  --muted-foreground: #8a8a82;
-  --accent: #f0f0eb;
-  --accent-foreground: #1a1a1a;
+
+  --card: var(--raised);
+  --card-foreground: var(--foreground);
+  --popover: var(--raised);
+  --popover-foreground: var(--foreground);
+  --secondary: #e8e5db;
+  --secondary-foreground: var(--foreground);
+  --muted: #e8e5db;
+  --accent: #eeebe2;
+  --accent-foreground: var(--foreground);
   --destructive: #ba1a1a;
-  --border: #d4d4cc;
-  --input: #e2e2dd;
-  --ring: #1a7a4f;
+  --input: var(--border);
+  --ring: var(--primary);
   --radius: 0px;
+
+  --grain-opacity: 0.035;
 }
+
+/* System preference, unless an explicit light choice was made. */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    color-scheme: dark;
+
+    --background: #0d0d0b;
+    --raised: #151512;
+    --foreground: #f2f0e8;
+    --ink-2: #b4b2a6;
+    --muted-foreground: #85837a;
+    --border: #292923;
+    --shade: #1c1c18;
+
+    --primary: #46d494;
+    --primary-foreground: #07130d;
+
+    --secondary: #1c1c18;
+    --muted: #1c1c18;
+    --accent: #1a1a16;
+
+    --grain-opacity: 0.045;
+  }
+}
+
+/* Explicit choice from the toggle always wins, in both directions. */
+.dark {
+  color-scheme: dark;
+
+  --background: #0d0d0b;
+  --raised: #151512;
+  --foreground: #f2f0e8;
+  --ink-2: #b4b2a6;
+  --muted-foreground: #85837a;
+  --border: #292923;
+  --shade: #1c1c18;
+
+  --primary: #46d494;
+  --primary-foreground: #07130d;
+
+  --secondary: #1c1c18;
+  --muted: #1c1c18;
+  --accent: #1a1a16;
+
+  --grain-opacity: 0.045;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer base {
   * {
-    @apply border-border outline-none;
+    @apply border-border;
   }
+
+  html {
+    @apply font-sans antialiased;
+    scroll-behavior: smooth;
+    /* Anchor links land below the fixed navbar instead of under it. */
+    scroll-padding-top: 6rem;
+  }
+
   body {
     @apply bg-background text-foreground;
+    /* Nothing on this page is ever meant to scroll sideways. */
+    overflow-x: hidden;
   }
-  html {
-    @apply font-sans antialiased scroll-smooth;
+
+  /* The previous stylesheet put `outline-none` on every element, which removed
+     keyboard focus from the whole site. Mouse users see nothing; keyboard users
+     get an unmistakable ring. */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
   }
+
   ::selection {
-    background-color: #1a7a4f;
-    color: #ffffff;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-/* ── Blueprint Grid Background ── */
-.blueprint-grid {
-  position: relative;
-  background-color: #f5f5f0;
-  background-image:
-    /* Vertical dashed lines */
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent calc(20% - 1px),
-      #d4d4cc calc(20% - 1px),
-      #d4d4cc 20%
-    );
-  background-size: 100% 8px;
-}
+/* ═══════════════════════════════════════════════════════════════════════════
+   TEXTURE
 
-.blueprint-grid::before {
+   A single fixed grain layer over the whole page. It is what stops a flat
+   two-colour palette from reading as a default template, and it echoes the
+   paper stock in the cutaway animations.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.grain::after {
   content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    /* Horizontal dashed lines */
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent calc(200px - 1px),
-      #d4d4cc calc(200px - 1px),
-      #d4d4cc 200px
-    );
-  background-size: 8px 100%;
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
   pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STRUCTURE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Four faint column rules behind the content. The previous version tried to
+   draw these with a repeating gradient sized in pixels, which produced a stripe
+   every 280px regardless of where the content actually was. */
+.column-rules {
+  position: fixed;
+  inset: 0;
   z-index: 0;
+  pointer-events: none;
+  max-width: 1440px;
+  margin-inline: auto;
 }
 
-/* Grid crosshair markers at intersections */
-.grid-cross {
+.column-rules span {
   position: absolute;
-  width: 16px;
-  height: 16px;
-  z-index: 1;
-}
-.grid-cross::before,
-.grid-cross::after {
-  content: "";
-  position: absolute;
-  background: #b0b0a8;
-}
-.grid-cross::before {
-  width: 16px;
-  height: 1px;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-.grid-cross::after {
-  width: 1px;
-  height: 16px;
-  left: 50%;
   top: 0;
-  transform: translateX(-50%);
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--border) 12%,
+    var(--border) 88%,
+    transparent
+  );
+  opacity: 0.5;
 }
 
-/* Dashed section dividers */
-.dashed-border-b {
-  border-bottom: 1px dashed #d4d4cc;
-}
-.dashed-border-t {
-  border-top: 1px dashed #d4d4cc;
+.rule-t {
+  border-top: 1px solid var(--border);
 }
 
-/* Thin solid section borders */
-.section-line {
-  border-bottom: 1px solid #d4d4cc;
+.rule-b {
+  border-bottom: 1px solid var(--border);
 }
 
-/* Monospace label style */
 .mono-label {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #8a8a82;
+  color: var(--muted-foreground);
 }
 
-/* Typewriter cursor blink */
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOTION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
+
 .cursor-blink {
   animation: blink 1s step-end infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 34s linear infinite;
+  will-change: transform;
+}
+
+/* Pausing on hover is a small courtesy: it lets people actually read a name
+   they recognised instead of chasing it across the screen. */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+  .cursor-blink {
+    animation: none;
+  }
+}
+
+/* Underline that draws in from the left on hover. Used on text links. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1px;
 }

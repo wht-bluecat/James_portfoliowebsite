@@ -1,152 +1,94 @@
 "use client"
 
+import { useMemo, useState } from "react"
 import { Reveal } from "@/components/ui/reveal"
+import { SectionHeading } from "@/components/ui/section-heading"
+import { PieceCard } from "@/components/ui/piece-card"
+import { films } from "@/data/work"
+import { cn } from "@/lib/utils"
 
-type Project = {
-  title: string
-} & (
-  | { type: "youtube"; youtubeId: string }
-  | { type: "behance"; behanceId: string }
-  | { type: "vimeo"; vimeoId: string }
-)
-
-const projects: Project[] = [
-  {
-    title: "Panaskopic — Ad",
-    type: "vimeo",
-    vimeoId: "1185939561",
-  },
-  {
-    title: "Stanley Chen — Intro Video",
-    type: "youtube",
-    youtubeId: "Ll6Qf6G5Jdg",
-  },
-  {
-    title: "Kenzie Elizabeth — Vlog",
-    type: "youtube",
-    youtubeId: "E9oJqUg0yoA",
-  },
-  {
-    title: "Kenzie Elizabeth — Podcast",
-    type: "youtube",
-    youtubeId: "9bQN5kXSYHI",
-  },
-  {
-    title: "Archway Learning — Leadership Promotional Video",
-    type: "vimeo",
-    vimeoId: "1191550837",
-  },
-  {
-    title: "Personal — Video Essay",
-    type: "youtube",
-    youtubeId: "diC6Sm6jOmE",
-  },
-  {
-    title: "Reignite Alpha — Landing Page",
-    type: "youtube",
-    youtubeId: "gtVOALCk3dQ",
-  },
-  {
-    title: "Post Malone — Concert Video",
-    type: "behance",
-    behanceId: "193302277",
-  },
-  {
-    title: "Educational — YouTube Short",
-    type: "behance",
-    behanceId: "241693425",
-  },
-  {
-    title: "YouTube Short",
-    type: "behance",
-    behanceId: "241693163",
-  },
-  {
-    title: "Podcast — Highlight Clip",
-    type: "behance",
-    behanceId: "246625883",
-  },
-  {
-    title: "Salo Salo — Promotional Video",
-    type: "behance",
-    behanceId: "198107191",
-  },
-  {
-    title: "Algonquin College — Video",
-    type: "behance",
-    behanceId: "212688527",
-  },
-  {
-    title: "Fintech Podcast",
-    type: "youtube",
-    youtubeId: "YbUXs5ka_VM",
-  },
+/**
+ * Sixteen items is past the point where a flat grid is scannable, so they are
+ * chunked into named groups. Nothing is hidden by default — "All" is the
+ * starting state — the filters just give someone looking for one specific kind
+ * of work a way to stop reading everything else.
+ */
+const filters = [
+  { label: "All", match: () => true },
+  { label: "Podcast", match: (t: string[]) => t.includes("Podcast") },
+  { label: "Explainer", match: (t: string[]) => t.includes("Explainer") },
+  { label: "Branded", match: (t: string[]) => t.includes("Branded") || t.includes("Event") },
+  { label: "Creator", match: (t: string[]) => t.includes("Creator") || t.includes("Personal") },
 ]
 
-export function VideoPortfolio() {
+export function VideoPortfolio({
+  posters,
+}: {
+  posters: Record<string, string | null>
+}) {
+  const [activeFilter, setActiveFilter] = useState("All")
+
+  const visible = useMemo(() => {
+    const filter = filters.find((f) => f.label === activeFilter) ?? filters[0]
+    return films.filter((piece) => filter.match(piece.tags))
+  }, [activeFilter])
+
   return (
-    <section id="work" className="max-w-[1440px] mx-auto px-8 md:px-12 py-24 md:py-36">
-      {/* Header */}
-      <Reveal>
-        <h2 className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-16">
-          Selected Work
-        </h2>
+    <section
+      id="work"
+      className="mx-auto max-w-[1440px] scroll-mt-24 px-6 py-16 md:px-12 md:py-24"
+    >
+      <SectionHeading
+        index="02"
+        meta="Selected work"
+        title="Long-form"
+        lede="Podcasts, explainers and branded films. Most of these run past twenty minutes, which means the whole job is deciding what to cut."
+      />
+
+      <Reveal delay={0.1}>
+        <div
+          className="mt-10 flex flex-wrap gap-2"
+          role="group"
+          aria-label="Filter work by type"
+        >
+          {filters.map((filter) => {
+            const isActive = activeFilter === filter.label
+            return (
+              <button
+                key={filter.label}
+                type="button"
+                onClick={() => setActiveFilter(filter.label)}
+                aria-pressed={isActive}
+                className={cn(
+                  "border px-4 py-2 font-mono text-[11px] uppercase tracking-wider transition-colors duration-200",
+                  isActive
+                    ? "border-ink bg-ink text-paper"
+                    : "border-hairline text-ink-3 hover:border-ink hover:text-ink"
+                )}
+              >
+                {filter.label}
+              </button>
+            )
+          })}
+        </div>
       </Reveal>
 
-      {/* Video grid — uniform 3 per row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {projects.map((project, i) => (
-          <Reveal
-            key={project.title}
-            delay={i * 0.08}
-          >
-            <div className="group">
-              {/* Embed — no scrollbar */}
-              <div className="relative aspect-video overflow-hidden rounded-lg bg-muted">
-                {project.type === "youtube" ? (
-                  <iframe
-                    src={`https://www.youtube.com/embed/${project.youtubeId}`}
-                    title={project.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    scrolling="no"
-                    className="absolute inset-0 w-full h-full border-0"
-                    style={{ overflow: "hidden" }}
-                  />
-                ) : project.type === "vimeo" ? (
-                  <iframe
-                    src={`https://player.vimeo.com/video/${project.vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`}
-                    title={project.title}
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    scrolling="no"
-                    className="absolute inset-0 w-full h-full border-0"
-                    style={{ overflow: "hidden" }}
-                  />
-                ) : (
-                  <iframe
-                    src={`https://www.behance.net/embed/project/${project.behanceId}?ilo0=1`}
-                    title={project.title}
-                    allow="clipboard-write"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                    scrolling="no"
-                    className="absolute inset-0 w-full h-full border-0"
-                    style={{ overflow: "hidden" }}
-                  />
-                )}
-              </div>
-
-              {/* Title */}
-              <p className="font-sans text-sm text-foreground/60 mt-3 group-hover:text-foreground transition-colors duration-300">
-                {project.title}
-              </p>
-            </div>
+      <div className="mt-10 grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {visible.map((piece, i) => (
+          <Reveal key={piece.id} delay={Math.min(i, 5) * 0.06}>
+            <PieceCard
+              piece={piece}
+              index={i}
+              aspect="16/9"
+              poster={posters[piece.id]}
+            />
           </Reveal>
         ))}
       </div>
+
+      {visible.length === 0 && (
+        <p className="mt-10 text-sm text-ink-3">Nothing in this category yet.</p>
+      )}
     </section>
   )
 }

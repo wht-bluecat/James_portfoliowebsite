@@ -2,51 +2,77 @@
 
 import { Reveal } from "@/components/ui/reveal"
 
-const footerLinks = [
-  { label: "About", href: "#about" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/james-yaptangco-230339200/", external: true },
+const elsewhere = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/james-yaptangco-230339200/",
+    external: true,
+  },
   { label: "Instagram", href: "https://www.instagram.com/wht.jame/", external: true },
-  { label: "Email", href: "mailto:yaptangco.mikael@gmail.com" },
-  { label: "Photography", href: "#sidequests" },
+  { label: "Email", href: "mailto:yaptangco.mikael@gmail.com", external: true },
+]
+
+const onPage = [
+  { label: "Work", href: "#work" },
+  { label: "Vertical", href: "#vertical" },
+  { label: "About", href: "#about" },
+  { label: "Photography", href: "#photography" },
 ]
 
 export function Footer() {
   return (
-    <footer className="max-w-[1440px] mx-auto px-8 md:px-12 py-24 md:py-36 dashed-border-t">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
-        {/* Left — email + large name */}
+    <footer className="rule-t mx-auto max-w-[1440px] px-6 py-16 md:px-12 md:py-24">
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
         <div className="md:col-span-6">
           <Reveal>
             <a
               href="mailto:yaptangco.mikael@gmail.com"
-              className="font-mono text-[11px] tracking-wider text-muted-foreground uppercase mb-8 block hover:text-foreground transition-colors"
+              className="link-underline mono-label mb-8 block w-fit transition-colors hover:text-ink"
             >
               yaptangco.mikael@gmail.com
             </a>
           </Reveal>
-          <Reveal delay={0.1}>
-            <h3 className="font-heading text-4xl md:text-6xl font-bold text-foreground/20 tracking-tight leading-[1.1]">
+
+          <Reveal delay={0.08}>
+            <p className="font-heading text-4xl font-bold leading-[1.08] tracking-tight text-ink-3/40 md:text-6xl">
               James
               <br />
-              Portfolio
-            </h3>
+              Yaptangco
+            </p>
           </Reveal>
         </div>
 
-        {/* Right — links */}
-        <div className="md:col-span-3 md:col-start-8">
+        <div className="md:col-span-3">
+          <Reveal delay={0.14}>
+            <span className="mono-label">On this page</span>
+            <div className="mt-4 flex flex-col gap-3">
+              {onPage.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="link-underline w-fit text-sm text-ink-3 transition-colors hover:text-ink"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="md:col-span-3">
           <Reveal delay={0.2}>
-            <div className="flex flex-col gap-4">
-              {footerLinks.map((link) => (
+            <span className="mono-label">Elsewhere</span>
+            <div className="mt-4 flex flex-col gap-3">
+              {elsewhere.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noopener noreferrer" : undefined}
-                  className="font-sans text-sm text-foreground/60 hover:text-foreground transition-colors flex items-center gap-2 group"
+                  className="link-underline flex w-fit items-center gap-1.5 text-sm text-ink-3 transition-colors hover:text-ink"
                 >
                   {link.label}
-                  <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span aria-hidden="true" className="text-[10px]">
                     &#8599;
                   </span>
                 </a>
@@ -56,14 +82,13 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <Reveal delay={0.3}>
-        <div className="dashed-border-t mt-16 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
-            Designed by James Yaptangco
+      <Reveal delay={0.26}>
+        <div className="rule-t mt-14 flex flex-col items-center justify-between gap-3 pt-6 sm:flex-row">
+          <span className="mono-label text-[10px]">
+            Designed &amp; built by James Yaptangco
           </span>
-          <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
-            &copy; {new Date().getFullYear()} — All rights reserved
+          <span className="mono-label text-[10px]">
+            &copy; {new Date().getFullYear()} &mdash; All rights reserved
           </span>
         </div>
       </Reveal>

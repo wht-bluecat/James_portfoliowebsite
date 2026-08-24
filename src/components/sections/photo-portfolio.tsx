@@ -1,47 +1,36 @@
 "use client"
 
 import { Reveal } from "@/components/ui/reveal"
-
-const photoProjects = [
-  { title: "Photo Collection I", behanceId: "203356825" },
-  { title: "Photo Collection II", behanceId: "210612609" },
-  { title: "Photo Collection III", behanceId: "210612813" },
-  { title: "Photo Collection IV", behanceId: "203356339" },
-  { title: "Photo Collection V", behanceId: "245105765" },
-  { title: "Photo Collection VI", behanceId: "210612997" },
-]
+import { SectionHeading } from "@/components/ui/section-heading"
+import { DeferredIframe } from "@/components/ui/deferred-iframe"
+import { photography } from "@/data/work"
 
 export function PhotoPortfolio() {
   return (
-    <section id="sidequests" className="max-w-[1440px] mx-auto px-8 md:px-12 py-24 md:py-36">
-      {/* Header */}
-      <Reveal>
-        <h2 className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-foreground mb-16">
-          Photography
-        </h2>
-      </Reveal>
+    <section
+      id="photography"
+      className="mx-auto max-w-[1440px] scroll-mt-24 px-6 py-16 md:px-12 md:py-24"
+    >
+      <SectionHeading
+        index="05"
+        meta="Side quests"
+        title="Photography"
+        lede="Shot on the weekends, mostly. The same instinct as the editing — wait for the frame, then take it."
+      />
 
-      {/* Photo grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {photoProjects.map((project, i) => (
-          <Reveal key={project.behanceId} delay={i * 0.08}>
-            <div className="group">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-muted">
-                <iframe
-                  src={`https://www.behance.net/embed/project/${project.behanceId}?ilo0=1`}
-                  title={project.title}
-                  allow="clipboard-write"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                  scrolling="no"
-                  className="absolute inset-0 w-full h-full border-0"
-                  style={{ overflow: "hidden" }}
-                />
-              </div>
-              <p className="font-sans text-sm text-foreground/60 mt-3 group-hover:text-foreground transition-colors duration-300">
+      <div className="mt-12 grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+        {photography.map((project, i) => (
+          <Reveal key={project.id} delay={Math.min(i, 4) * 0.06}>
+            <figure className="group">
+              <DeferredIframe
+                src={`https://www.behance.net/embed/project/${project.id}?ilo0=1`}
+                title={`Photography ${project.title}`}
+                aspect="portrait"
+              />
+              <figcaption className="mt-3 text-[13px] text-ink-3 transition-colors group-hover:text-ink">
                 {project.title}
-              </p>
-            </div>
+              </figcaption>
+            </figure>
           </Reveal>
         ))}
       </div>

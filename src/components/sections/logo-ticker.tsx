@@ -1,43 +1,36 @@
-"use client"
+import { clients } from "@/data/work"
 
-import { motion } from "framer-motion"
-
-const companies = [
-  "DYF Campaign",
-  "Kenzie Elizabeth LLC",
-  "ARchway Learning Solutions",
-  "Heidi Henderson",
-  "Club Socialistas",
-  "Salo Salo",
-  "Hidden Nights",
-  "Fortrust",
-  "Reignite Alpha",
-]
-
+/**
+ * A CSS marquee rather than a framer-motion one: this animates a transform on
+ * the compositor instead of driving a React state update every frame, so it
+ * costs nothing while the rest of the page is loading posters. It also pauses
+ * on hover, and stops entirely under prefers-reduced-motion.
+ */
 export function LogoTicker() {
   return (
-    <section className="dashed-border-t dashed-border-b py-6 overflow-hidden max-w-[1440px] mx-auto">
-      <div className="flex items-center px-8 md:px-12 gap-12">
-        <span className="font-sans text-sm text-muted-foreground whitespace-nowrap shrink-0">
-          Companies I&apos;ve contributed to @
+    <section className="rule-t rule-b mx-auto max-w-[1440px] overflow-hidden py-5">
+      <div className="marquee flex items-center gap-10 px-6 md:px-12">
+        <span className="shrink-0 whitespace-nowrap text-[13px] text-ink-3">
+          Trusted by
         </span>
-        <div className="overflow-hidden flex-1 relative">
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10" />
-          <motion.div
-            className="flex gap-16 items-center"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            {[...companies, ...companies].map((name, i) => (
+
+        <div className="relative flex-1 overflow-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-paper to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-paper to-transparent" />
+
+          <div className="marquee-track flex w-max items-center gap-14">
+            {[...clients, ...clients].map((name, i) => (
               <span
                 key={`${name}-${i}`}
-                className="font-heading text-lg md:text-xl font-bold text-foreground/30 whitespace-nowrap select-none"
+                // The duplicate half is decorative; screen readers should hear
+                // the client list exactly once.
+                aria-hidden={i >= clients.length ? "true" : undefined}
+                className="select-none whitespace-nowrap font-heading text-lg font-bold text-ink-3/70 md:text-xl"
               >
                 {name}
               </span>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
