@@ -38,8 +38,10 @@ export function Hero() {
           <Reveal delay={0.4} mount>
             {/* The floor is 2.5rem rather than 3rem so "Yaptangco" still fits
                 inside a 320px viewport instead of being clipped by the
-                overflow guard on <body>. */}
-            <h1 className="font-heading text-[clamp(2.5rem,13vw,10.5rem)] font-black leading-[0.84] tracking-[-0.045em] text-ink">
+                overflow guard on <body>. From lg up the computer sits beside
+                the name, so the size tracks the room left over: at 13vw the
+                last letter ran 78px underneath it on a 1024px screen. */}
+            <h1 className="font-heading text-[clamp(2.5rem,13vw,10.5rem)] font-black lg:text-[clamp(4.5rem,calc(20.7vw_-_107px),10.5rem)] leading-[0.84] tracking-[-0.045em] text-ink">
               James
               <br />
               <span className="block">Yaptangco</span>
