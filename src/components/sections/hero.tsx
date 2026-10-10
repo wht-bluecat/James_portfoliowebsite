@@ -4,11 +4,12 @@ import { LiveClock } from "@/components/ui/live-clock"
 import { Typewriter } from "@/components/ui/typewriter"
 import { Reveal } from "@/components/ui/reveal"
 import { RetroComputer } from "@/components/ui/retro-computer"
+import { run } from "@/data/channel"
 
 const typewriterPhrases = [
   "I EDIT VIDEOS THAT HOLD ATTENTION.",
   "I BUILD ANIMATION THAT TEACHES.",
-  "I SHOOT STORIES WORTH REMEMBERING.",
+  "I RUN THE CHANNEL AFTER THE EDIT.",
   "I READ THE RETENTION CURVE AFTERWARDS.",
 ]
 
@@ -16,7 +17,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative mx-auto flex min-h-[100svh] max-w-[1440px] flex-col justify-between px-6 pb-10 pt-24 md:px-12 md:pt-28"
+      className="relative mx-auto flex min-h-[100svh] max-w-[1440px] flex-col justify-between px-6 pb-8 pt-24 md:px-12 md:pt-24"
     >
       <Reveal delay={0.1} direction="none" mount>
         <div className="rule-b flex items-center justify-between gap-4 pb-4">
@@ -26,7 +27,7 @@ export function Hero() {
         </div>
       </Reveal>
 
-      <div className="flex flex-1 items-center justify-between gap-8 py-8">
+      <div className="flex flex-1 items-center justify-between gap-8 py-6">
         <div className="flex min-w-0 flex-1 flex-col justify-center">
           <Reveal delay={0.25} mount>
             <p className="mb-1 font-serif text-3xl italic text-ink-3 md:text-5xl lg:text-6xl">
@@ -45,23 +46,24 @@ export function Hero() {
             </h1>
           </Reveal>
 
-          {/* The one sentence a prospective client actually needs. It sat nowhere
-              on the old page — you had to infer the offer from the work. */}
+          {/* The one sentence a prospective client actually needs: not just
+              the edit, but everything that happens to it afterwards. */}
           <Reveal delay={0.55} mount>
-            <p className="mt-7 max-w-lg text-base leading-relaxed text-ink-2 md:text-lg">
-              I turn long, technical conversations into video people finish &mdash;
-              podcasts, explainer animation and short-form for brands and creators.
-              Based in Manila, working worldwide.
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-2 md:text-lg">
+              I edit the video, then run everything after it: the Shorts, the
+              thumbnails, the captions, the posting and the weekly numbers. One
+              person on the whole channel, for podcasts and brands. Based in
+              Manila, working worldwide.
             </p>
           </Reveal>
 
           <Reveal delay={0.65} mount>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
-                href="#work"
+                href="#results"
                 className="rounded-full bg-brand px-7 py-3.5 font-mono text-xs uppercase tracking-wider text-primary-foreground transition-all duration-300 hover:brightness-110 motion-safe:hover:-translate-y-0.5"
               >
-                See the work
+                See the results
               </a>
               <a
                 href="mailto:yaptangco.mikael@gmail.com"
@@ -71,6 +73,26 @@ export function Hero() {
                 <span aria-hidden="true">&#8599;</span>
               </a>
             </div>
+          </Reveal>
+
+          {/* Proof above the fold, for the visitor who arrived from an email
+              and will decide in one screen whether to keep scrolling. */}
+          <Reveal delay={0.75} mount>
+            <a
+              href="#results"
+              className="group mt-3 flex w-fit items-center gap-2.5 py-2 font-mono text-[11px] uppercase tracking-[0.08em] text-ink-3 transition-colors hover:text-ink"
+            >
+              <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+              <span>
+                Latest: {run.published} videos published in {run.weeks} weeks for Green Thumb Depot
+              </span>
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 motion-safe:group-hover:translate-y-0.5"
+              >
+                &#8595;
+              </span>
+            </a>
           </Reveal>
         </div>
 
@@ -94,7 +116,7 @@ export function Hero() {
         <Reveal delay={0.85} mount>
           <div>
             <p className="text-base font-semibold text-ink md:text-lg">
-              Video Editor &amp; Photographer
+              Video Editor &amp; Social Media Manager
             </p>
             <p className="text-base text-ink-3 md:text-lg">Based in Manila</p>
           </div>

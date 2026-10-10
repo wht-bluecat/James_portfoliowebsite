@@ -1,7 +1,10 @@
 import { Navbar } from "@/components/sections/navbar"
 import { Hero } from "@/components/sections/hero"
 import { LogoTicker } from "@/components/sections/logo-ticker"
+import { Results } from "@/components/sections/results"
 import { Featured } from "@/components/sections/featured"
+import { Pipeline } from "@/components/sections/pipeline"
+import { Motion } from "@/components/sections/motion"
 import { VideoPortfolio } from "@/components/sections/video-portfolio"
 import { ShortForm } from "@/components/sections/short-form"
 import { About } from "@/components/sections/about"
@@ -28,7 +31,10 @@ export default async function Home() {
       <main>
         <Hero />
         <LogoTicker />
+        <Results />
         <Featured />
+        <Pipeline />
+        <Motion />
         <VideoPortfolio posters={posters} />
         <ShortForm posters={posters} />
         <About />

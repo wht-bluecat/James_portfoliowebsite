@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/reveal"
 const stats = [
   { value: "3", label: "Years editing" },
   { value: "50+", label: "Projects shipped" },
-  { value: "5", label: "Platforms", detail: "YouTube, Shorts, Reels, TikTok, Podcast" },
+  { value: "5", label: "Platforms", detail: "YouTube, Instagram, TikTok, X, Podcast" },
 ]
 
 /**
@@ -27,8 +27,8 @@ const services = [
     body: "Shorts, Reels and TikTok assembled from long-form, hooks written and tested first.",
   },
   {
-    title: "Thumbnails & distribution",
-    body: "Covers, titles and posting packs, then reading the impressions and click-through after.",
+    title: "Channel management",
+    body: "Thumbnails, titles, captions, scheduling and posting across every platform, then a weekly report on what it did.",
   },
 ]
 
@@ -40,7 +40,7 @@ export function About() {
     >
       <div className="rule-t grid grid-cols-1 gap-10 pt-6 md:grid-cols-12 md:gap-16">
         <Reveal className="md:col-span-2">
-          <span className="mono-label">[04] About</span>
+          <span className="mono-label">[07] About</span>
         </Reveal>
 
         <div className="md:col-span-6">
@@ -54,8 +54,8 @@ export function About() {
           <Reveal delay={0.16}>
             <p className="max-w-xl text-base leading-relaxed text-ink-2 md:text-lg">
               Based in Manila, working with clients worldwide. I bring both the
-              creative eye and the analytical mind &mdash; every cut is
-              intentional, and afterwards I go and check whether it worked.
+              creative eye and the analytical mind. Every cut is intentional,
+              and afterwards I go and check whether it worked.
             </p>
           </Reveal>
 

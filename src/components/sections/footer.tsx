@@ -13,7 +13,10 @@ const elsewhere = [
 ]
 
 const onPage = [
-  { label: "Work", href: "#work" },
+  { label: "Results", href: "#results" },
+  { label: "Services", href: "#services" },
+  { label: "Motion", href: "#motion" },
+  { label: "Long-form", href: "#work" },
   { label: "Vertical", href: "#vertical" },
   { label: "About", href: "#about" },
   { label: "Photography", href: "#photography" },
@@ -88,7 +91,7 @@ export function Footer() {
             Designed &amp; built by James Yaptangco
           </span>
           <span className="mono-label text-[10px]">
-            &copy; {new Date().getFullYear()} &mdash; All rights reserved
+            &copy; {new Date().getFullYear()} · All rights reserved
           </span>
         </div>
       </Reveal>

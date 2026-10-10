@@ -26,7 +26,7 @@ export function LiveClock() {
 
   return (
     <span className="font-mono text-[11px] tracking-wider text-muted-foreground uppercase">
-      {time} — PH
+      {time} · PH
     </span>
   )
 }

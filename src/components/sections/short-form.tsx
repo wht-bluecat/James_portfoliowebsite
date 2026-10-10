@@ -17,10 +17,10 @@ export function ShortForm({ posters }: { posters: Record<string, string | null> 
       className="mx-auto max-w-[1440px] scroll-mt-24 px-6 py-16 md:px-12 md:py-24"
     >
       <SectionHeading
-        index="03"
+        index="06"
         meta="Short-form"
         title="Vertical"
-        lede="Shorts, Reels and vertical ads. The Green Thumb Depot pieces each carry explainer animation built native at 1080 by 1920, not a landscape graphic cropped down."
+        lede="Shorts, Reels and vertical ads. Every Green Thumb Depot clip goes out as a Short and as a Reel on the same day, so each card shows the count from whichever platform it did better on."
       />
 
       <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-3 lg:grid-cols-5">

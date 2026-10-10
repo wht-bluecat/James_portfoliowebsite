@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/reveal"
 
 /**
  * The end of the page is one of the two moments people actually remember, so it
- * gets the largest type on the site and exactly two actions — book, or write.
+ * gets the largest type on the site and exactly two actions: book, or write.
  * Anything else here would just be a third thing to weigh.
  */
 export function CTA() {
@@ -26,7 +26,7 @@ export function CTA() {
 
       <Reveal delay={0.2}>
         <p className="mx-auto mb-10 max-w-md text-[15px] leading-relaxed text-ink-2">
-          Tell me the format, the deadline and roughly what you want it to do.
+          Tell me the show, the deadline and what you want the channel to do.
           I&apos;ll tell you if I&apos;m the right person for it.
         </p>
       </Reveal>

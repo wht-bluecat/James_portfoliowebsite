@@ -28,7 +28,8 @@ export function SectionHeading({
 
       <div className="mt-8 grid gap-6 md:grid-cols-12 md:items-end">
         <Reveal delay={0.05} className="md:col-span-7">
-          <h2 className="font-heading text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[0.95] tracking-[-0.03em] text-ink">
+          {/* pre-line so a title can choose its own line breaks with "\n". */}
+          <h2 className="whitespace-pre-line font-heading text-[clamp(2.25rem,6vw,4.5rem)] font-bold leading-[0.95] tracking-[-0.03em] text-ink">
             {title}
           </h2>
         </Reveal>

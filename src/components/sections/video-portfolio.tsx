@@ -39,7 +39,7 @@ export function VideoPortfolio({
       className="mx-auto max-w-[1440px] scroll-mt-24 px-6 py-16 md:px-12 md:py-24"
     >
       <SectionHeading
-        index="02"
+        index="05"
         meta="Selected work"
         title="Long-form"
         lede="Podcasts, explainers and branded films. Most of these run past twenty minutes, which means the whole job is deciding what to cut."

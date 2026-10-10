@@ -5,10 +5,11 @@ import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 const navLinks = [
+  { label: "Results", href: "#results", id: "results" },
+  { label: "Services", href: "#services", id: "services" },
+  { label: "Motion", href: "#motion", id: "motion" },
   { label: "Work", href: "#work", id: "work" },
-  { label: "Vertical", href: "#vertical", id: "vertical" },
   { label: "About", href: "#about", id: "about" },
-  { label: "Photography", href: "#photography", id: "photography" },
 ]
 
 const externalLinks = [
@@ -118,7 +119,7 @@ export function Navbar() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline flex items-center gap-1 text-sm text-ink-3 transition-colors hover:text-ink"
+              className="link-underline hidden items-center gap-1 text-sm text-ink-3 transition-colors hover:text-ink lg:flex"
             >
               {link.label}
               {/* The arrow means "this leaves the site". Putting it on in-page

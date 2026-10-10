@@ -5,7 +5,7 @@ import { DeferredIframe } from "./deferred-iframe"
 import { formatViews, type Piece } from "@/data/work"
 
 /**
- * One piece of work. The caption stays visible rather than hiding on hover —
+ * One piece of work. The caption stays visible rather than hiding on hover:
  * a client scanning for "who did what" should never have to hunt for it, and
  * hover captions do not exist on touch at all.
  */
@@ -27,14 +27,14 @@ export function PieceCard({
       {piece.provider === "behance" ? (
         <DeferredIframe
           src={`https://www.behance.net/embed/project/${piece.id}?ilo0=1`}
-          title={`${piece.client} — ${piece.title}`}
+          title={`${piece.client}: ${piece.title}`}
           aspect="video"
         />
       ) : (
         <VideoEmbed
           provider={piece.provider}
           id={piece.id}
-          title={`${piece.client} — ${piece.title}`}
+          title={`${piece.client}: ${piece.title}`}
           aspect={aspect}
           poster={poster}
           priority={priority}
@@ -48,7 +48,11 @@ export function PieceCard({
           </span>
           {(piece.views || piece.duration) && (
             <span className="font-mono text-[10px] tracking-[0.08em] text-ink-3">
-              {piece.views ? `${formatViews(piece.views)} views` : piece.duration}
+              {piece.plays && piece.plays > (piece.views ?? 0)
+                ? `${formatViews(piece.plays)} on Instagram`
+                : piece.views
+                  ? `${formatViews(piece.views)} views`
+                  : piece.duration}
             </span>
           )}
         </div>

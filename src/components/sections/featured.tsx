@@ -9,15 +9,15 @@ import { featured } from "@/data/work"
  *
  * A flat wall of sixteen equal thumbnails asks the visitor to work out which
  * one is the good one. This does that work for them: the strongest result on
- * the reel gets the largest frame, the numbers beside it, and the story of why
- * it worked — and everything after it is read in that light.
+ * the reel gets the largest frame, the numbers beside it and the story of why
+ * it worked, and everything after it is read in that light.
  */
 export function Featured() {
   return (
     <section className="mx-auto max-w-[1440px] px-6 pb-16 pt-14 md:px-12 md:pb-24 md:pt-20">
       <div className="rule-t pt-6">
         <Reveal>
-          <span className="mono-label">[01] Featured &mdash; {featured.client}</span>
+          <span className="mono-label">[02] Case study · {featured.client}</span>
         </Reveal>
       </div>
 

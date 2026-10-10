@@ -29,17 +29,19 @@ const geistMono = Geist_Mono({
 
 const SITE = "https://james-portfoliowebsite.vercel.app"
 const DESCRIPTION =
-  "Video editor and photographer in Manila. I cut long-form podcasts, explainer animation and short-form that holds attention — and I measure whether it worked."
+  "Video editor and social media manager in Manila. I cut the long-form, build the explainer animation and the Shorts, then publish and report on the whole channel."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "James Yaptangco — Video Editor & Photographer",
-    template: "%s — James Yaptangco",
+    default: "James Yaptangco | Video Editor & Social Media Manager",
+    template: "%s | James Yaptangco",
   },
   description: DESCRIPTION,
   keywords: [
     "video editor",
+    "social media manager",
+    "YouTube channel management",
     "podcast editor",
     "motion graphics",
     "short form video",
@@ -53,13 +55,13 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE,
     siteName: "James Yaptangco",
-    title: "James Yaptangco — Video Editor & Photographer",
+    title: "James Yaptangco | Video Editor & Social Media Manager",
     description: DESCRIPTION,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "James Yaptangco — Video Editor & Photographer",
+    title: "James Yaptangco | Video Editor & Social Media Manager",
     description: DESCRIPTION,
   },
   alternates: { canonical: SITE },
@@ -83,7 +85,7 @@ const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "James Yaptangco",
-  jobTitle: "Video Editor and Photographer",
+  jobTitle: "Video Editor and Social Media Manager",
   url: SITE,
   address: { "@type": "PostalAddress", addressLocality: "Manila", addressCountry: "PH" },
   email: "mailto:yaptangco.mikael@gmail.com",
@@ -115,10 +117,10 @@ export default function RootLayout({
       </head>
       <body className="grain bg-paper font-sans text-ink">
         <a
-          href="#work"
+          href="#results"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
         >
-          Skip to the work
+          Skip to the results
         </a>
         {children}
       </body>

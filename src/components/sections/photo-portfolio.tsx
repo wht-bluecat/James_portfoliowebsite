@@ -12,10 +12,10 @@ export function PhotoPortfolio() {
       className="mx-auto max-w-[1440px] scroll-mt-24 px-6 py-16 md:px-12 md:py-24"
     >
       <SectionHeading
-        index="05"
+        index="08"
         meta="Side quests"
         title="Photography"
-        lede="Shot on the weekends, mostly. The same instinct as the editing — wait for the frame, then take it."
+        lede="Shot on the weekends, mostly. The same instinct as the editing: wait for the frame, then take it."
       />
 
       <div className="mt-12 grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">

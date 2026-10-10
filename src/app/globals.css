@@ -42,6 +42,7 @@
   --color-hairline: var(--border);
   --color-shade: var(--shade);
   --color-brand: var(--primary);
+  --color-chart-context: var(--chart-context);
 
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
@@ -90,6 +91,11 @@
   --radius: 0px;
 
   --grain-opacity: 0.035;
+
+  /* De-emphasis grey for the "before" bars in the results chart. 3.1:1 on the
+     paper, so the context is still legible without competing with the brand
+     green that carries the story. */
+  --chart-context: #8c887b;
 }
 
 /* System preference, unless an explicit light choice was made. */
@@ -113,6 +119,7 @@
     --accent: #1a1a16;
 
     --grain-opacity: 0.045;
+    --chart-context: #64635a;
   }
 }
 
@@ -136,6 +143,7 @@
   --accent: #1a1a16;
 
   --grain-opacity: 0.045;
+  --chart-context: #64635a;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -156,8 +164,10 @@
 
   body {
     @apply bg-background text-foreground;
-    /* Nothing on this page is ever meant to scroll sideways. */
-    overflow-x: hidden;
+    /* Nothing on this page is ever meant to scroll sideways. `clip` rather
+       than `hidden`: hidden turns <body> into a scroll container, which
+       silently breaks every position: sticky below it. */
+    overflow-x: clip;
   }
 
   /* The previous stylesheet put `outline-none` on every element, which removed
