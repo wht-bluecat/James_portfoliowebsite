@@ -68,6 +68,56 @@ export const featured: Featured = {
 }
 
 /* ---------------------------------------------------------------------------
+   LATEST: the newest full episode, with its first-day analytics.
+   Unlike everything in data/channel.ts these numbers come from YouTube Studio
+   (owner analytics), so the section labels them as such and dates the read.
+   To refresh, read the video's Studio Overview, Reach and Engagement tabs and
+   replace the `studio` block and MEASURED_AT together.
+   --------------------------------------------------------------------------- */
+
+export type Latest = Piece & {
+  summary: string
+  /** When it went live, ISO with zone. */
+  publishedAt: string
+  studio: {
+    /** When the numbers below were read, ISO with zone. */
+    measuredAt: string
+    views: number
+    watchHours: number
+    averageViewSeconds: number
+    impressions: number
+    clickThroughRate: number
+    /** Share of views from Browse features (home and subscription feeds), percent. */
+    browseShare: number
+    /** Share of views from YouTube search, percent. */
+    searchShare: number
+  }
+}
+
+export const latest: Latest = {
+  id: "qdv5fWrIAQ0",
+  provider: "youtube",
+  title: "Commercial Greenhouse Tour",
+  client: "Green Thumb Depot",
+  role: "Editor · Grade · Motion graphics · Thumbnail · Publishing",
+  duration: "38:28",
+  tags: ["Long-form", "Podcast", "On location", "Motion graphics"],
+  summary:
+    "Recorded on site at a commercial greenhouse in Oceanside, California, on 19 October and live two days later. iPhone footage graded for the web, 13 full-frame explainer animations, 9 photo cards and 4 callbacks to earlier episodes, all cut and finished in DaVinci Resolve.",
+  publishedAt: "2026-10-21T15:00:07Z",
+  studio: {
+    measuredAt: "2026-10-22T04:36:00Z",
+    views: 6730,
+    watchHours: 552.7,
+    averageViewSeconds: 9 * 60 + 21,
+    impressions: 27_200,
+    clickThroughRate: 7.7,
+    browseShare: 94.6,
+    searchShare: 0.5,
+  },
+}
+
+/* ---------------------------------------------------------------------------
    LONG-FORM
    --------------------------------------------------------------------------- */
 

@@ -220,6 +220,8 @@ export function ColumnChart({
                     // A label on a column near the left edge would be clipped
                     // if it were centred, so it hangs to the right instead.
                     const nearLeft = index < flat.length * 0.12
+                    // The same on the right edge, hanging to the left.
+                    const nearRight = index > flat.length * 0.88
 
                     return (
                       <div
@@ -256,7 +258,7 @@ export function ColumnChart({
                             aria-hidden="true"
                             className={cn(
                               "pointer-events-none absolute whitespace-nowrap font-mono text-[10px] tracking-[0.06em] text-ink-2 transition-opacity delay-700 duration-500",
-                              nearLeft ? "left-0" : "left-1/2 -translate-x-1/2",
+                              nearLeft ? "left-0" : nearRight ? "right-0" : "left-1/2 -translate-x-1/2",
                               inView ? "opacity-100" : "opacity-0"
                             )}
                             style={{ bottom: `calc(${height}% + 7px)` }}

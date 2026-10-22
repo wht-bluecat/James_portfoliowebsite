@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/reveal"
 import { SectionHeading } from "@/components/ui/section-heading"
 import { CountUp } from "@/components/ui/count-up"
 import { ColumnChart, type ColumnGroup } from "@/components/ui/column-chart"
-import { formatViews } from "@/data/work"
+import { formatViews, latest } from "@/data/work"
 import {
   channelVideos,
   INSTAGRAM_FOLLOWERS,
@@ -152,9 +152,9 @@ const reelGroups: ColumnGroup[] = [
 
 /* ── Layout ──────────────────────────────────────────────────────────────── */
 
-type Tile = (typeof youtubeTiles)[number]
+export type Tile = (typeof youtubeTiles)[number]
 
-function Tiles({ tiles, className }: { tiles: Tile[]; className: string }) {
+export function Tiles({ tiles, className }: { tiles: Tile[]; className: string }) {
   return (
     <dl className={`grid border-l border-t border-hairline ${className}`}>
       {tiles.map((tile, i) => (
@@ -217,6 +217,7 @@ export function Results() {
             marks={{
               [record.id]: `${formatViews(record.views)} · channel record`,
               [oldRecord.id]: `${formatViews(oldRecord.views)} · old record`,
+              [latest.id]: `${formatViews(channelVideos.find((v) => v.id === latest.id)?.views ?? 0)} · first day`,
             }}
             legend={{ emphasis: "Since I picked it up", context: "Before" }}
             gapLabel="10 months, no uploads"

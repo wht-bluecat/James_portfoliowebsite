@@ -2,6 +2,7 @@ import { Navbar } from "@/components/sections/navbar"
 import { Hero } from "@/components/sections/hero"
 import { LogoTicker } from "@/components/sections/logo-ticker"
 import { Results } from "@/components/sections/results"
+import { Latest } from "@/components/sections/latest"
 import { Featured } from "@/components/sections/featured"
 import { Pipeline } from "@/components/sections/pipeline"
 import { Motion } from "@/components/sections/motion"
@@ -32,6 +33,7 @@ export default async function Home() {
         <Hero />
         <LogoTicker />
         <Results />
+        <Latest />
         <Featured />
         <Pipeline />
         <Motion />
