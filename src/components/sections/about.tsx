@@ -24,7 +24,7 @@ const services = [
   },
   {
     title: "Short-form",
-    body: "Shorts, Reels and TikTok assembled from long-form, hooks written and tested first.",
+    body: "Shorts, Reels and TikTok cut from long-form, and vertical ads built from raw footage. Hooks written and tested first.",
   },
   {
     title: "Channel management",
@@ -40,7 +40,7 @@ export function About() {
     >
       <div className="rule-t grid grid-cols-1 gap-10 pt-6 md:grid-cols-12 md:gap-16">
         <Reveal className="md:col-span-2">
-          <span className="mono-label">[07] About</span>
+          <span className="mono-label">[08] About</span>
         </Reveal>
 
         <div className="md:col-span-6">

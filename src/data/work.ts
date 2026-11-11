@@ -482,6 +482,52 @@ export const loops: Loop[] = [
 ]
 
 /* ---------------------------------------------------------------------------
+   CLIENT REELS: vertical ads edited for OAX Media, a Denver agency.
+   Shown with OAX's written OK (the contract needs it for any portfolio use).
+   Each slug is a pair of files in /public/reels: <slug>.mp4 and <slug>.jpg,
+   made from the delivered masters by scripts/encode-reels.sh.
+   --------------------------------------------------------------------------- */
+
+export type Reel = {
+  slug: string
+  title: string
+  duration: string
+  /** What the edit does, in plain words. */
+  note: string
+}
+
+export const agency = {
+  name: "OAX Media",
+  city: "Denver",
+  client: "Accountable Home Services",
+  clientIs: "Disaster restoration, Denver",
+  from: "Raw footage and a brief",
+  role: ["Edit", "Captions", "Animation", "Sound design", "Grade"],
+  madeIn: "DaVinci Resolve",
+  delivered: "4K vertical, revised on the agency's notes",
+  reels: [
+    {
+      slug: "oax-water-mitigation",
+      title: "Water mitigation in three steps",
+      duration: "0:27",
+      note: "One take, kept whole. Each step lands as a tape strip on the word he says it, rings track the equipment he points at, and the recap ticks all three.",
+    },
+    {
+      slug: "oax-one-call",
+      title: "One call, peace of mind",
+      duration: "0:22",
+      note: "Two takes joined into one answer. The title sits behind his head, and a marker card draws the path from the first call to reconstruction as he walks through it.",
+    },
+    {
+      slug: "oax-meaning-of-ahs",
+      title: "What the name stands for",
+      duration: "1:26",
+      note: "The owner on the name and the standard he holds his crew to. Hand-drawn lists carry his points, office B-roll covers the joins, and two sections came out on the agency's notes to bring it from 1:59 to 1:26.",
+    },
+  ] satisfies Reel[],
+}
+
+/* ---------------------------------------------------------------------------
    PIPELINE: everything one recording turns into, in the order it gets made.
    `track` is the short label on the timeline graphic; `clips` places that
    stage's pieces along it as [start %, width %] pairs.
@@ -598,6 +644,7 @@ export const photography = [
 
 export const clients = [
   "Green Thumb Depot",
+  "OAX Media",
   "DYF Campaign",
   "Kenzie Elizabeth LLC",
   "ARchway Learning Solutions",

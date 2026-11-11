@@ -16,6 +16,7 @@ const onPage = [
   { label: "Results", href: "#results" },
   { label: "Services", href: "#services" },
   { label: "Motion", href: "#motion" },
+  { label: "Client reels", href: "#reels" },
   { label: "Long-form", href: "#work" },
   { label: "Vertical", href: "#vertical" },
   { label: "About", href: "#about" },

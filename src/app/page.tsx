@@ -6,6 +6,7 @@ import { Latest } from "@/components/sections/latest"
 import { Featured } from "@/components/sections/featured"
 import { Pipeline } from "@/components/sections/pipeline"
 import { Motion } from "@/components/sections/motion"
+import { ClientReels } from "@/components/sections/client-reels"
 import { VideoPortfolio } from "@/components/sections/video-portfolio"
 import { ShortForm } from "@/components/sections/short-form"
 import { About } from "@/components/sections/about"
@@ -37,6 +38,7 @@ export default async function Home() {
         <Featured />
         <Pipeline />
         <Motion />
+        <ClientReels />
         <VideoPortfolio posters={posters} />
         <ShortForm posters={posters} />
         <About />

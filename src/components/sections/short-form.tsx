@@ -17,7 +17,7 @@ export function ShortForm({ posters }: { posters: Record<string, string | null> 
       className="mx-auto max-w-[1440px] scroll-mt-24 px-6 py-16 md:px-12 md:py-24"
     >
       <SectionHeading
-        index="06"
+        index="07"
         meta="Short-form"
         title="Vertical"
         lede="Shorts, Reels and vertical ads. Every Green Thumb Depot clip goes out as a Short and as a Reel on the same day, so each card shows the count from whichever platform it did better on."
